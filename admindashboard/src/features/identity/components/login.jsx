@@ -1,4 +1,5 @@
 import logo from '@assets/images/logo.svg';
+import { Link } from 'react-router-dom';
 const Login = () => {
     return(
         <>
@@ -10,7 +11,11 @@ const Login = () => {
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
+            <Link to="/register" className="me-2">
+            وارد شوید
+          </Link>
         </p>
+      
       </div>
 
       <div className="card">
