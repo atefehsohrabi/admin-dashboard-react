@@ -1,4 +1,5 @@
-const Login = () =>{
+import logo from '@assets/images/logo.svg';
+const Login = () => {
     return(
         <>
         <div className="text-center mt-4">
@@ -9,7 +10,7 @@ const Login = () =>{
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
-          <Link to="/register" className="me-2">ثبت نام کنید </Link>
+
         </p>
       </div>
 
@@ -40,3 +41,4 @@ const Login = () =>{
       </>
     )
 }
+export default Login;
