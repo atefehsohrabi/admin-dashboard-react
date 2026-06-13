@@ -10,7 +10,6 @@ const Login = () => {
         </p>
         <p className="lead">
           قبلا ثبت نام نکرده اید؟
-
         </p>
       </div>
 
