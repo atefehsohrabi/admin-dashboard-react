@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 
 const Register = () => {
- const {register, handleSubmit, formState:{errors}} = useForm();
- const onSubmit = data => console.log(data);
+ const {register,watch, handleSubmit, formState:{errors}} = useForm();
+ const onSubmit = (data) => console.log(data);
     return(
         <>
       <div className="text-center mt-4">
@@ -31,31 +31,63 @@ const Register = () => {
                   maxLength:11
                 })} className={`form-control form-control-lg ${errors.mobile && 'is-invalid'}`}
                 />
-                <p>${errors.mobile.message}</p>
+                {
+                  errors.mobile && errors.mobile.type === 'required' && (
+                    <p>{errors.mobile?.message}</p>
+                  )
+                }
+                 {
+                  errors.mobile && (errors.mobile.type === 'minLength' | errors.mobile.type === 'maxLength') && (
+                    <p>موبایل باید 11 رقم باشد.</p>
+                  )
+                }
               </div>
               <div className="mb-3">
                 <label className="form-label">رمز عبور</label>
                 <input {...register('password', {
-                  required:'',
-                  minLength:11,
-                  maxLength:11
+                  required:'رمز عبور الزامی است.',
+                  minLength:6,
+                  maxLength:6
                 })}
                   className={`form-control form-control-lg ${errors.password && 'is-invalid'}`}
                   type="password"
                 />
-                <p>${errors.password.message}</p>
+                {
+                  errors.mobile && errors.password.type === 'required' && (
+                    <p>{errors.mobile?.message}</p>
+                  )
+                }
+                {
+                  errors.mobile && (errors.password.type === 'minLength' | errors.password.type === 'maxLength') && (
+                    <p>‍سورد باید 6 رقم باشد.</p>
+                  )
+                }
               </div>
               <div className="mb-3">
                 <label className="form-label">تکرار رمز عبور</label>
                 <input {...register('confirmPassword', {
-                  required:'',
-                  minLength:11,
-                  maxLength:11
+                  required:'تکرار رمز عبور الزامی است.',
+                  validate:(value) => {
+                    if(watch('password') !== value){
+                      return 'عدم تطابق با رمز وارد شده'
+                    }
+                  },
+                  minLength:6,
+                  maxLength:6
                 })}
                   className={`form-control form-control-lg ${errors.confirmPassword && 'is-invalid'}`}
                   type="password"
                 />
-               <p>${errors.confirmPassword.message}</p>
+               {
+                  errors.mobile && errors.confirmPassword.type === 'required' && (
+                    <p>{errors.confirmPassword?.message}</p>
+                  )
+                }
+                {
+                  errors.mobile && errors.confirmPassword.type === 'validate' && (
+                    <p>{errors.confirmPassword?.message}</p>
+                  )
+                }
               </div>
               <div className="text-center mt-3">
                 <button type="submit" className="btn btn-lg btn-primary">
